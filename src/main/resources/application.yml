@@ -1,1 +1,11 @@
-spring.application.name=BookMall
+server:
+  port: 8080
+
+spring:
+  application:
+    name: BookMall
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    username: root
+    password: 123456
