@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class Knife4jConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
+        log.info("初始化Knife4j");
         return new OpenAPI()
                 // 接口文档标题
                 .info(new Info().title("API接口文档")
