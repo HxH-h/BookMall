@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Options;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bookmall.Controller.Response.Result;
 import java.util.List;
@@ -28,6 +30,17 @@ public class Test {
     public Result test(){
         TestPojo test = testMapper.getTest();
         System.out.println(test.getId() + test.getName());
-        return new Result(Code.TEST_SUCCESS, Message.TEST_SUCCESS_MSG);
+        return new Result(Code.GET_SUCCESS, Message.GET_SUCCESS_MSG);
     }
+
+    @PostMapping("/testpost")
+    @Operation(summary = "测试POST接口")
+    public Result testpost(){
+        TestPojo test = testMapper.getTest();
+        System.out.println(test.getId() + test.getName());
+        return new Result(Code.POST_SUCCESS, Message.POST_SUCCESS_MSG);
+    }
+
+
+
 }
