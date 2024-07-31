@@ -13,7 +13,7 @@ public class Result<T> {
     @Schema(name = "状态信息")
     String msg;
     @Schema(name = "响应数据")
-    HashMap<String,T> data = null;
+    T data = null;
 
 
     public Result(Integer code, String msg) {
@@ -21,7 +21,7 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public Result(Integer code, String msg, HashMap<String,T> data) {
+    public Result(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -43,11 +43,11 @@ public class Result<T> {
         this.msg = msg;
     }
 
-    public HashMap<String, T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(HashMap<String, T> data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

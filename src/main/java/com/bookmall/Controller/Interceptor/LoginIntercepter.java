@@ -12,9 +12,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginIntercepter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("拦截请求" + request.getRequestURI());
+
         String token = request.getHeader("Authorization");
         if (token == null){
+            System.out.println("拦截请求" + request.getRequestURI());
             Result result = new Result(Code.NEEDLOGIN, Message.NEEDLOGIN);
             ObjectMapper objectMapper = new ObjectMapper();
             String s = objectMapper.writeValueAsString(result);
@@ -26,6 +27,7 @@ public class LoginIntercepter implements HandlerInterceptor {
         try {
             JWTUtils.parseJWT(token);
         }catch (Exception e){
+            System.out.println("拦截请求" + request.getRequestURI());
             Result result = new Result(Code.NEEDLOGIN, Message.NEEDLOGIN);
             ObjectMapper objectMapper = new ObjectMapper();
             String s = objectMapper.writeValueAsString(result);

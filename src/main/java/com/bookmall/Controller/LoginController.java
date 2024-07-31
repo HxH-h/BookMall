@@ -5,7 +5,7 @@ import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
 import com.bookmall.Controller.Utils.JWTUtils;
-import com.bookmall.Service.LoginService;
+import com.bookmall.Service.Impl.LoginServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ import java.util.HashMap;
 @Tag(name = "管理员 和 用户登录接口")
 public class LoginController {
     @Autowired
-    LoginService loginService;
+    LoginServiceImpl loginServiceImpl;
 
     @Operation(summary = "登录接口")
     @PostMapping("/admin/login")
     public Result AdminLoginCtroller(@RequestBody LoginDTO loginDTO){
-        if (loginService.AdminExist(loginDTO.getUsername() , loginDTO.getPassword())){
+        if (loginServiceImpl.AdminExist(loginDTO.getUsername() , loginDTO.getPassword())){
             String jwt = JWTUtils.getJWT(loginDTO);
             HashMap<String, String> token = new HashMap<>();
             token.put("token",jwt);
