@@ -1,4 +1,4 @@
-package com.bookmall.Controller.Utils;
+package com.bookmall.Utils;
 
 import com.bookmall.Controller.ControllerPojo.LoginDTO;
 import io.jsonwebtoken.Claims;
@@ -14,12 +14,16 @@ import java.util.HashMap;
 public class JWTUtils {
 
     static String secretKey;
-
+    static String userSecretKey;
     @Value("${jwt.secret-key}")
     public void setSecretKey(String secretKey) {
         JWTUtils.secretKey = secretKey;
     }
 
+    @Value("${jwt.user-secret-key}")
+    public static void setUserSecretKey(String userSecretKey) {
+        JWTUtils.userSecretKey = userSecretKey;
+    }
 
     static Integer Expire;
     @Value("${jwt.expire}")
@@ -39,6 +43,15 @@ public class JWTUtils {
                 .compact();
     }
 
+    public static String getUserToken(String openid){
+        HashMap<String, String> info = new HashMap<>();
+        info.put("openid", openid);
+        return Jwts.builder()
+                .setClaims(info)     //自定义载荷
+                .signWith(SignatureAlgorithm.HS256, secretKey)    //签名算法
+                .setExpiration(new Date(System.currentTimeMillis() + Expire))
+                .compact();
+    }
     public static LoginDTO parseJWT(String token){
 
         Claims body = Jwts.parserBuilder()

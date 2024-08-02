@@ -21,6 +21,7 @@ public class BookController {
     @Autowired
     BookServiceImpl bookServiceImpl;
 
+    //TODO 完善添加图书的功能，接收上传的图书图片并保存在阿里云中，返回访问链接
     @PostMapping("/add")
     @Operation(summary = "添加图书信息")
     public Result addBook(@RequestBody BookDTO bookDTO){
@@ -37,6 +38,7 @@ public class BookController {
         return new Result(Code.UPDATE_BOOK_SUCCESS,Message.UPDATE_BOOK_SUCCESS);
     }
 
+    //TODO 同时删除阿里云中的图片
     @DeleteMapping("/{uuid}")
     @Operation(summary = "删除图书信息")
     public Result deleteBook(@PathVariable String uuid){

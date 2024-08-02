@@ -27,4 +27,9 @@ public class Code {
 
     public static final Integer UPDATE_TIME_EXCEPTION = 2005;
 
+    public static final Integer USER_LOGIN_EXCEPTION = 2006;
+    public static final Integer LOGIN_GETCODE_SUCCESS = 1016;
+    public static final Integer USER_LOGIN_SUCCESS = 1026;
+    public static final Integer INDENTIFIED_CODE_INCORRECT = 2026;
+
 }

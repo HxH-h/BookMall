@@ -3,7 +3,7 @@ package com.bookmall.Controller.Interceptor;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
-import com.bookmall.Controller.Utils.JWTUtils;
+import com.bookmall.Utils.JWTUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

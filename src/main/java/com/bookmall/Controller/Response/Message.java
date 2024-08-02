@@ -25,4 +25,10 @@ public class Message {
 
     public static final String UPDATE_TIME_EXCEPTION = "自动更新时间失败";
 
+    public static final String USER_LOGIN_EXCEPTION = "微信认证身份失败";
+    public static final String LOGIN_GETCODE_SUCCESS = "获取二维码成功";
+
+    public static final String USER_LOGIN_SUCCESS = "登录成功";
+    public static final String INDENTIFIED_CODE_INCORRECT = "验证码错误";
+
 }

@@ -4,14 +4,22 @@ server:
 spring:
   application:
     name: BookMall
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bookmall?serverTimezone=UTC
     username: root
     password: 123456
+
+  data:
+    redis:
+      host: 127.0.0.1
+      password: 123456
+      port: 6379
   mvc:
     servlet:
       load-on-startup: 1
+
 springdoc:
   packages-to-scan: com.bookmall.Controller
 
@@ -22,6 +30,13 @@ springdoc:
 jwt:
   secret-key: aDIwdTA0eHUwNGFuMjZoZTYyMzHlm77kuabllYbln47pobnnm67lr4bpkqU=
   expire: 3600000
+  user-secret-key: aDIwdTA0eHUwNGFuMjZoZTYyMzHlm77kuabllYbln47pobnnm67lr4bpkqU=
 
+
+Wechat:
+  appid: wx145aaa13fb3ddfd3
+  appsecret: 73ba2a6779da6a69a910290720306e2e
+  granttype: authorization_code
+  url: https://api.weixin.qq.com/sns/jscode2session
 
 

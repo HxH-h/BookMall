@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmall.Dao.Mapper.UserMapper">
+    <insert id="addUser">
+        insert into user values(#{uuid},#{openid},#{username},#{phone},#{sex},#{photo},#{career},#{addtime})
+    </insert>
+
+    <select id="selectByopenid" resultType="com.bookmall.Dao.Pojo.User">
+        select * from user where openid = #{openid}
+    </select>
+</mapper>

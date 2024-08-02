@@ -12,8 +12,9 @@ public class SpringMVCconfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         String[] excludePatterns = new String[]{"/swagger-resources/**", "/webjars/**", "/v3/**", "/swagger-ui.html/**",
-                "/api", "/api-docs", "/api-docs/**", "/doc.html/**","/favicon.ico" ,"/*/login"};
+                "/api", "/api-docs", "/api-docs/**", "/doc.html/**","/favicon.ico" ,"/*/login","/user/codecache","/user/getQRcode"};
         registry.addInterceptor(new LoginIntercepter())
                 .addPathPatterns("/**").excludePathPatterns(excludePatterns);
+
     }
 }
