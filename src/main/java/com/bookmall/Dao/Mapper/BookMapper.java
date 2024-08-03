@@ -23,4 +23,6 @@ public interface BookMapper {
 
     List<Book> selectAll(int start,int page);
 
+    Book selectByuuid(String uuid);
+
 }

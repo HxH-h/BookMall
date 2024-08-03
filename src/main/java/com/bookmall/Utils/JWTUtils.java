@@ -52,16 +52,17 @@ public class JWTUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + Expire))
                 .compact();
     }
-    public static LoginDTO parseJWT(String token){
+    public static String parseJWT(String token ,String type){
 
         Claims body = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return new LoginDTO((String) body.get("username"),(String) body.get("password"));
+        return (String) body.get(type);
 
     }
+
 
 
 }

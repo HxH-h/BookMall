@@ -37,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
         if (redisTemplate.opsForHash().hasKey(RedisConstant.LOGIN+weChatDTO.getUuid(),weChatDTO.getIndentifiedCode())){
             String openid = (String) redisTemplate.opsForHash().get(RedisConstant.LOGIN+weChatDTO.getUuid(),weChatDTO.getIndentifiedCode());
+            //验证成功则删除验证码
+            redisTemplate.delete(RedisConstant.LOGIN+weChatDTO.getUuid());
+            //用户不存在则自动注册
             if (!searchUser(openid)){
                 UserRegiste(openid);
             }

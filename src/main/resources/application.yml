@@ -39,4 +39,5 @@ Wechat:
   granttype: authorization_code
   url: https://api.weixin.qq.com/sns/jscode2session
 
+# TODO 上线的版本不要提交
 

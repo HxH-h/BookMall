@@ -4,6 +4,7 @@ import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
 import com.bookmall.CusException.AutoUpdateTimeException;
+import com.bookmall.CusException.BookNotFoundException;
 import com.bookmall.CusException.IndentifiedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,12 +31,19 @@ public class ExceptionController {
         return new Result(Code.USER_LOGIN_EXCEPTION,Message.USER_LOGIN_EXCEPTION);
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(BookNotFoundException.class)
     @ResponseBody
-    public Result unknownException(Exception e){
-        log.info("未知错误   " + e.getMessage());
-        return new Result(9999,"UNKNOWN_ERROE");
+    public Result bookNotFoundExpHandler(BookNotFoundException b){
+        log.info(b.message);
+        return new Result(Code.BOOK_NOTFOUND_EXCEPTION,Message.BOOK_NOTFOUND_EXCEPTION);
     }
+
+//    @ExceptionHandler(Exception.class)
+//    @ResponseBody
+//    public Result unknownException(Exception e){
+//        log.info("未知错误   " + e.getMessage());
+//        return new Result(9999,"UNKNOWN_ERROE");
+//    }
 
 
 

@@ -32,4 +32,9 @@ public class Code {
     public static final Integer USER_LOGIN_SUCCESS = 1026;
     public static final Integer INDENTIFIED_CODE_INCORRECT = 2026;
 
+    public static final Integer ADD_SHOPCART_SUCCESS = 1007;
+    public static final Integer CLEAR_SHOPCART_SUCCESS =1017;
+    public static final Integer GETINFO_SHOPCART_SUCCESS = 1027;
+    public static final Integer BOOK_NOTFOUND_EXCEPTION = 2007;
+
 }

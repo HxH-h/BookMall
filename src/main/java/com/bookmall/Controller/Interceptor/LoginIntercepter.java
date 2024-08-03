@@ -3,6 +3,7 @@ package com.bookmall.Controller.Interceptor;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
+import com.bookmall.Controller.UserInfoThread;
 import com.bookmall.Utils.JWTUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +26,14 @@ public class LoginIntercepter implements HandlerInterceptor {
         }
 
         try {
-            JWTUtils.parseJWT(token);
+            String requestURI = request.getRequestURI();
+            if (requestURI.contains("user")){
+                String openid = JWTUtils.parseJWT(token,"openid");
+                UserInfoThread.setInfo(openid);
+            } else if (requestURI.contains("admin")) {
+                JWTUtils.parseJWT(token,"username");
+            }
+
         }catch (Exception e){
             System.out.println("拦截请求" + request.getRequestURI());
             Result result = new Result(Code.NEEDLOGIN, Message.NEEDLOGIN);

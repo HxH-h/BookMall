@@ -31,4 +31,9 @@ public class Message {
     public static final String USER_LOGIN_SUCCESS = "登录成功";
     public static final String INDENTIFIED_CODE_INCORRECT = "验证码错误";
 
+    public static final String ADD_SHOPCART_SUCCESS = "添加购物车成功";
+    public static final String CLEAR_SHOPCART_SUCCESS = "清空购物车成功";
+    public static final String GETINFO_SHOPCART_SUCCESS = "查看购物车成功";
+    public static final String BOOK_NOTFOUND_EXCEPTION = "未找到该图书";
+
 }
