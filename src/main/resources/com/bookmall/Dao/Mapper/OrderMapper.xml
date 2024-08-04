@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmall.Dao.Mapper.OrderMapper">
+    <insert id="addOrder">
+        insert into shoporder values (#{id},#{status},#{userid},#{addressid},#{order_time},#{pay_time},#{pay_method},
+        #{pay_status},#{amount},#{phone},#{address},#{consignee},#{cancel_reason},
+        #{rejection_reason},#{cancel_time},#{deliver_time},#{deliver_status})
+    </insert>
+
+    <insert id="addOrderDetail">
+        insert into order_detail values
+        <foreach collection="orderDetails" item="od" separator=",">
+            (#{od.orderid},#{od.bookid},#{od.cnt},#{od.amount})
+        </foreach>
+    </insert>
+
+    <update id="updateBookCnt" parameterType="list" >
+        <foreach collection="orderDetails" item="od" separator=";" >
+            update book set cnt = cnt - #{od.cnt} where uuid = #{od.bookid}
+        </foreach>
+    </update>
+
+</mapper>

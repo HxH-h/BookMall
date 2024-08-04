@@ -7,7 +7,39 @@
         insert into user values(#{uuid},#{openid},#{username},#{phone},#{sex},#{photo},#{career},#{addtime})
     </insert>
 
+    <insert id="addAddress">
+        insert into address (userid,consignee,sex,phone,province,city,district,detail,label,isdefault)
+        values(
+            #{userid},#{consignee},#{sex},#{phone},#{province},#{city},#{district},#{detail},#{label},#{isdefault}
+        )
+    </insert>
+
     <select id="selectByopenid" resultType="com.bookmall.Dao.Pojo.User">
         select * from user where openid = #{openid}
     </select>
+
+    <select id="getAddress" resultType="com.bookmall.Dao.Pojo.Address">
+        select * from address where userid = #{uuid}
+    </select>
+
+    <select id="getSingleAddress" resultType="com.bookmall.Dao.Pojo.Address">
+        select * from address where userid = #{uuid} and id = #{id}
+    </select>
+
+
+    <select id="getUUid" resultType="String">
+        select uuid from user where openid = #{openid}
+    </select>
+
+    <update id="updateDefault">
+        update address set isdefault = 0 where userid = #{uuid};
+        update address set isdefault = 1 where id = #{id} and userid = #{uuid}
+    </update>
+
+    <delete id="delAddress">
+        delete from address where id = #{id} and userid = #{uuid}
+    </delete>
+
+
+
 </mapper>

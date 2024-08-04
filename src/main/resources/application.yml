@@ -7,7 +7,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bookmall?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/bookmall?serverTimezone=UTC&allowMultiQueries=true&useAffectedRows=true
     username: root
     password: 123456
 
@@ -29,7 +29,7 @@ springdoc:
 # 自定义属性
 jwt:
   secret-key: aDIwdTA0eHUwNGFuMjZoZTYyMzHlm77kuabllYbln47pobnnm67lr4bpkqU=
-  expire: 3600000
+  expire: 43200000
   user-secret-key: aDIwdTA0eHUwNGFuMjZoZTYyMzHlm77kuabllYbln47pobnnm67lr4bpkqU=
 
 

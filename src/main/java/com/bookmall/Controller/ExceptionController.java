@@ -3,9 +3,7 @@ package com.bookmall.Controller;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
-import com.bookmall.CusException.AutoUpdateTimeException;
-import com.bookmall.CusException.BookNotFoundException;
-import com.bookmall.CusException.IndentifiedException;
+import com.bookmall.CusException.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,6 +34,33 @@ public class ExceptionController {
     public Result bookNotFoundExpHandler(BookNotFoundException b){
         log.info(b.message);
         return new Result(Code.BOOK_NOTFOUND_EXCEPTION,Message.BOOK_NOTFOUND_EXCEPTION);
+    }
+    @ExceptionHandler(ShopCartEmptyException.class)
+    @ResponseBody
+    public Result shopCartEmptyExpHandler(ShopCartEmptyException s){
+        log.info(s.message);
+        return new Result(Code.SHOPCART_EMPTY,Message.SHOPCART_EMPTY);
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    @ResponseBody
+    public Result addressNotFoundExpHandler(AddressNotFoundException a){
+        log.info(a.message);
+        return new Result(Code.ADDRESS_NOTFOUND,Message.ADDRESS_NOTFOUND);
+    }
+
+    @ExceptionHandler(BookShortageException.class)
+    @ResponseBody
+    public Result bookShortageExceptionExpHandler(BookShortageException b){
+        log.info(b.message);
+        return new Result(Code.BOOK_SHORTAGE,b.message);
+    }
+
+    @ExceptionHandler(NumberIllegalException.class)
+    @ResponseBody
+    public Result numberIllegalExceptionExpHandler(NumberIllegalException n){
+        log.info(n.message);
+        return new Result(Code.NUMBER_ILLEGAL,n.message);
     }
 
 //    @ExceptionHandler(Exception.class)

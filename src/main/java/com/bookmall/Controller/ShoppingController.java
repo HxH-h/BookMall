@@ -1,10 +1,13 @@
 package com.bookmall.Controller;
 
 import com.bookmall.Controller.ControllerPojo.GoodsDTO;
+import com.bookmall.Controller.ControllerPojo.OrderDTO;
+import com.bookmall.Controller.ControllerPojo.OrderVO;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
-import com.bookmall.CusException.BookNotFoundException;
+import com.bookmall.CusException.*;
+import com.bookmall.Dao.Mapper.OrderMapper;
 import com.bookmall.Dao.Pojo.Book;
 import com.bookmall.Service.Impl.ShopServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,9 +25,12 @@ public class ShoppingController {
     @Autowired
     ShopServiceImpl shopServiceImpl;
 
+    @Autowired
+    OrderMapper orderMapper;
+
     @Operation(summary = "添加到购物车")
     @PostMapping("/add")
-    public Result addGoods(@RequestBody GoodsDTO goodsDTO) throws BookNotFoundException {
+    public Result addGoods(@RequestBody GoodsDTO goodsDTO) throws BookNotFoundException, BookShortageException, NumberIllegalException {
         shopServiceImpl.addGoods(goodsDTO);
         return new Result(Code.ADD_SHOPCART_SUCCESS, Message.ADD_SHOPCART_SUCCESS);
     }
@@ -41,5 +47,13 @@ public class ShoppingController {
     public Result<List> showCart(){
         List<Book> books = shopServiceImpl.showCart();
         return new Result<List>(Code.GETINFO_SHOPCART_SUCCESS,Message.GETINFO_SHOPCART_SUCCESS,books);
+    }
+    @Operation(summary = "用户下单")
+    @PostMapping("/order")
+    public Result<OrderVO> order(@RequestBody OrderDTO orderDTO) throws ShopCartEmptyException, AddressNotFoundException, BookShortageException {
+
+        OrderVO order = shopServiceImpl.order(orderDTO);
+        return new Result<OrderVO>(Code.ORDER_SUCCESS,Message.ORDER_SUCCESS,order);
+
     }
 }

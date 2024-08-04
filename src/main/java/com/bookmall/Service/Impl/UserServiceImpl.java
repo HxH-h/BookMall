@@ -3,9 +3,12 @@ package com.bookmall.Service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.bookmall.Constant.RedisConstant;
 import com.bookmall.Constant.WeChatConstant;
+import com.bookmall.Controller.ControllerPojo.AddressDTO;
 import com.bookmall.Controller.ControllerPojo.WeChatDTO;
+import com.bookmall.Controller.UserInfoThread;
 import com.bookmall.CusException.IndentifiedException;
 import com.bookmall.Dao.Mapper.UserMapper;
+import com.bookmall.Dao.Pojo.Address;
 import com.bookmall.Dao.Pojo.User;
 import com.bookmall.Service.UserService;
 import com.bookmall.Utils.HTTPUtils;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -112,6 +116,32 @@ public class UserServiceImpl implements UserService {
         byte[] bytes = HTTPUtils.postQRcode("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token="+accesstoken,jsonObject);
         String base64Str = Base64.getEncoder().encodeToString(bytes);
         return base64Str;
+    }
+
+    @Override
+    public void addAddress(AddressDTO addressDTO) {
+        Address address = new Address();
+        BeanUtils.copyProperties(addressDTO,address);
+        String uuid = userMapper.getUUid(UserInfoThread.getInfo());
+        address.setUserid(uuid);
+        address.setIsdefault(0);
+        userMapper.addAddress(address);
+    }
+
+    @Override
+    public void updateDefault(int id){
+        String uuid = userMapper.getUUid(UserInfoThread.getInfo());
+        userMapper.updateDefault(id,uuid);
+    }
+    @Override
+    public void delAddress(int id){
+        String uuid = userMapper.getUUid(UserInfoThread.getInfo());
+        userMapper.delAddress(id,uuid);
+    }
+    @Override
+    public List<Address> showAddress(){
+        String uuid = userMapper.getUUid(UserInfoThread.getInfo());
+        return userMapper.getAddress(uuid);
     }
 
 }

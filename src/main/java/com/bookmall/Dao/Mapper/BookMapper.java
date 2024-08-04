@@ -1,5 +1,6 @@
 package com.bookmall.Dao.Mapper;
 
+import com.bookmall.Dao.Pojo.Address;
 import com.bookmall.Dao.Pojo.Book;
 import com.bookmall.Service.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
@@ -24,5 +25,7 @@ public interface BookMapper {
     List<Book> selectAll(int start,int page);
 
     Book selectByuuid(String uuid);
+
+    int getCnt(String uuid);
 
 }
