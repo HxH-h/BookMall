@@ -43,5 +43,6 @@ public class Message {
     public static final String COUNT_NOT_ENOUGH = "库存不足";
     public static final String SHOPCART_EMPTY = "购物车空";
     public static final String ADDRESS_NOTFOUND = "地址不存在";
+    public static final String PAY_SUCCESS = "支付成功";
 
 }

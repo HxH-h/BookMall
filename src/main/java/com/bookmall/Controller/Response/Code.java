@@ -43,6 +43,7 @@ public class Code {
     public static final Integer CLEAR_SHOPCART_SUCCESS =1017;
     public static final Integer GETINFO_SHOPCART_SUCCESS = 1027;
     public static final Integer ORDER_SUCCESS = 1037;
+    public static final Integer PAY_SUCCESS = 1047;
 
     public static final Integer BOOK_NOTFOUND_EXCEPTION = 2007;
     public static final Integer COUNT_NOT_ENOUGH = 2017;
@@ -50,5 +51,6 @@ public class Code {
     public static final Integer ADDRESS_NOTFOUND = 2037;
     public static final Integer BOOK_SHORTAGE = 2047;
     public static final Integer NUMBER_ILLEGAL = 2057;
+    public static final Integer ORDER_NOTFOUND = 2067;
 
 }

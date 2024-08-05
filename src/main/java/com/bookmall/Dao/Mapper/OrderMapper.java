@@ -13,4 +13,6 @@ public interface OrderMapper {
     void addOrderDetail(List<OrderDetail> orderDetails);
 
     int updateBookCnt(List<OrderDetail> orderDetails);
+    void pay(String id,int status,String pay_time,int pay_method,int pay_status);
+    Order getOrder(String id);
 }

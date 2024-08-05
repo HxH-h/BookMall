@@ -22,4 +22,13 @@
         </foreach>
     </update>
 
+    <update id="pay">
+        update shoporder set status = #{status}, pay_time = #{pay_time}, pay_method = #{pay_method}, pay_status = #{pay_status}
+        where id = #{id}
+    </update>
+
+    <select id="getOrder" resultType="com.bookmall.Dao.Pojo.Order">
+        select * from shoporder where id = #{id}
+    </select>
+
 </mapper>

@@ -6,4 +6,5 @@ public class ExceptionMsg {
     public static String SHOPCART_EMPTY = "购物车为空";
     public static String ADDRESS_NOTFOUND = "地址不存在";
     public static String BOOK_SHORTAGE = "库存不足";
+    public static String ORDER_NOTFOUND = "订单不存在";
 }

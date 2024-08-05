@@ -63,6 +63,15 @@ public class ExceptionController {
         return new Result(Code.NUMBER_ILLEGAL,n.message);
     }
 
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseBody
+    public Result orderNotFoundExceptionExceptionExpHandler(OrderNotFoundException o){
+        log.info(o.message);
+        return new Result(Code.ORDER_NOTFOUND,o.message);
+    }
+
+
+
 //    @ExceptionHandler(Exception.class)
 //    @ResponseBody
 //    public Result unknownException(Exception e){

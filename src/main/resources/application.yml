@@ -23,7 +23,10 @@ spring:
 springdoc:
   packages-to-scan: com.bookmall.Controller
 
-
+#日志管理
+logging:
+  level:
+    com.bookmall.Dao.Mapper: debug
 
 
 # 自定义属性

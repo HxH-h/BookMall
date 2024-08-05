@@ -3,6 +3,7 @@ package com.bookmall.Service;
 import com.bookmall.Controller.ControllerPojo.GoodsDTO;
 import com.bookmall.Controller.ControllerPojo.OrderDTO;
 import com.bookmall.Controller.ControllerPojo.OrderVO;
+import com.bookmall.Controller.ControllerPojo.PayDTO;
 import com.bookmall.CusException.*;
 import com.bookmall.Dao.Pojo.Book;
 
@@ -14,4 +15,5 @@ public interface ShopService {
      List<Book> showCart();
 
      OrderVO order(OrderDTO orderDTO) throws ShopCartEmptyException, AddressNotFoundException, BookShortageException;
+     void pay(PayDTO payDTO) throws OrderNotFoundException;
 }

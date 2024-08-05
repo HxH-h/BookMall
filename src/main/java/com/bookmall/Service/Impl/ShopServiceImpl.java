@@ -7,6 +7,7 @@ import com.bookmall.Constant.RedisConstant;
 import com.bookmall.Controller.ControllerPojo.GoodsDTO;
 import com.bookmall.Controller.ControllerPojo.OrderDTO;
 import com.bookmall.Controller.ControllerPojo.OrderVO;
+import com.bookmall.Controller.ControllerPojo.PayDTO;
 import com.bookmall.Controller.UserInfoThread;
 import com.bookmall.CusException.*;
 import com.bookmall.Dao.Mapper.BookMapper;
@@ -222,5 +223,18 @@ public class ShopServiceImpl implements ShopService {
         order.setDeliver_status(OrderConstant.UNSEND);
         orderMapper.addOrder(order);
         redisTemplate.opsForValue().increment(RedisConstant.ORDER_COUNT);
+    }
+
+    @Override
+    public void pay(PayDTO payDTO) throws OrderNotFoundException {
+        Order order = orderMapper.getOrder(payDTO.getOrderid());
+        if (order == null){
+            throw new OrderNotFoundException(ExceptionMsg.ORDER_NOTFOUND);
+        }
+
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String format = formatter.format(date);
+        orderMapper.pay(payDTO.getOrderid(),OrderConstant.PENDING_CONFIREM,format, payDTO.getPay_method(), OrderConstant.PAID);
     }
 }

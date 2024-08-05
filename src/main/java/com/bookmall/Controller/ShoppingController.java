@@ -3,6 +3,7 @@ package com.bookmall.Controller;
 import com.bookmall.Controller.ControllerPojo.GoodsDTO;
 import com.bookmall.Controller.ControllerPojo.OrderDTO;
 import com.bookmall.Controller.ControllerPojo.OrderVO;
+import com.bookmall.Controller.ControllerPojo.PayDTO;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
@@ -55,5 +56,12 @@ public class ShoppingController {
         OrderVO order = shopServiceImpl.order(orderDTO);
         return new Result<OrderVO>(Code.ORDER_SUCCESS,Message.ORDER_SUCCESS,order);
 
+    }
+
+    @Operation(summary = "用户支付")
+    @PostMapping("/pay")
+    public Result pay(@RequestBody PayDTO payDTO) throws OrderNotFoundException {
+        shopServiceImpl.pay(payDTO);
+        return new Result(Code.PAY_SUCCESS,Message.PAY_SUCCESS);
     }
 }
