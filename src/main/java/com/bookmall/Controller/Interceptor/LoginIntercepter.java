@@ -15,6 +15,7 @@ public class LoginIntercepter implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         String token = request.getHeader("Authorization");
+
         if (token == null){
             System.out.println("拦截请求" + request.getRequestURI());
             Result result = new Result(Code.NEEDLOGIN, Message.NEEDLOGIN);

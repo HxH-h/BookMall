@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmall.Dao.Mapper.BookMapper">
+    <insert id="addBook">
+        insert into book values (#{title},#{author},#{time},#{press},#{price},#{detail},#{uuid},#{cnt},#{addtime},#{updatetime})
+    </insert>
+
+    <update id="updateBook">
+        update book
+        <set>
+            <if test="price != null and price != 0"> price = #{price},</if>
+            <if test="detail != null"> detail = #{detail},</if>
+            <if test="cnt != null and cnt != 0"> cnt = #{cnt},</if>
+            updatetime = #{updatetime}
+        </set>
+        where uuid = #{uuid}
+    </update>
+
+    <delete id="deleteBook">
+        delete from book where uuid = #{uuid}
+    </delete>
+
+    <select id="selectByname" resultType="com.bookmall.Dao.Pojo.Book">
+        select * from book where title = #{name}
+    </select>
+    <select id="selectAll" resultType="com.bookmall.Dao.Pojo.Book">
+        select * from book limit #{start},#{page}
+    </select>
+
+    <select id="selectByuuid" resultType="com.bookmall.Dao.Pojo.Book">
+        select * from book where uuid = #{uuid}
+    </select>
+
+    <select id="getCnt" resultType="int">
+        select cnt from book where uuid = #{uuid}
+    </select>
+
+</mapper>

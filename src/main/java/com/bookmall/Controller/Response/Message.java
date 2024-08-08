@@ -22,6 +22,7 @@ public class Message {
 
     public static final String SEARCH_BOOK_SUCCESS = "查询图书信息成功";
     public static final String SEARCH_BOOK_EXCEPTION = "查询图书失败";
+    public static final String GETSUM_SUCCESS = "查询总数成功";
 
     public static final String UPDATE_TIME_EXCEPTION = "自动更新时间失败";
 
@@ -44,5 +45,10 @@ public class Message {
     public static final String SHOPCART_EMPTY = "购物车空";
     public static final String ADDRESS_NOTFOUND = "地址不存在";
     public static final String PAY_SUCCESS = "支付成功";
+    public static final String REMINDER_SUCCESS = "催单成功";
+    public static final String GET_ORDER_SUCCESS = "获取订单成功";
+    public static final String CONFIRM_ORDER_SUCCESS = "确认订单成功";
+    public static final String CANCEL_ORDER_SUCCESS = "取消订单成功";
+    public static final String UPDATE_ORDERSTATUS_SUCCESS = "更改订单状态成功";
 
 }

@@ -4,6 +4,7 @@ import com.bookmall.Dao.Pojo.Address;
 import com.bookmall.Dao.Pojo.Book;
 import com.bookmall.Service.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +28,7 @@ public interface BookMapper {
     Book selectByuuid(String uuid);
 
     int getCnt(String uuid);
+    @Select("select count(*) from book")
+    int getBookSum();
 
 }

@@ -9,6 +9,7 @@ import com.bookmall.Controller.ControllerPojo.OrderDTO;
 import com.bookmall.Controller.ControllerPojo.OrderVO;
 import com.bookmall.Controller.ControllerPojo.PayDTO;
 import com.bookmall.Controller.UserInfoThread;
+import com.bookmall.Controller.WebSocketContrller;
 import com.bookmall.CusException.*;
 import com.bookmall.Dao.Mapper.BookMapper;
 import com.bookmall.Dao.Mapper.OrderMapper;
@@ -24,6 +25,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -41,6 +43,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     OrderMapper orderMapper;
+
+    @Autowired
+    WebSocketContrller webSocketContrller;
+
 
     //添加购物车
     @Override
@@ -226,7 +232,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void pay(PayDTO payDTO) throws OrderNotFoundException {
+    public void pay(PayDTO payDTO) throws OrderNotFoundException, IOException {
         Order order = orderMapper.getOrder(payDTO.getOrderid());
         if (order == null){
             throw new OrderNotFoundException(ExceptionMsg.ORDER_NOTFOUND);
@@ -236,5 +242,10 @@ public class ShopServiceImpl implements ShopService {
         Date date = new Date(System.currentTimeMillis());
         String format = formatter.format(date);
         orderMapper.pay(payDTO.getOrderid(),OrderConstant.PENDING_CONFIREM,format, payDTO.getPay_method(), OrderConstant.PAID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","1");
+        map.put("orderid",order.getId());
+        map.put("text",order.getId());
+        webSocketContrller.broadcast(JSONObject.toJSONString(map));
     }
 }

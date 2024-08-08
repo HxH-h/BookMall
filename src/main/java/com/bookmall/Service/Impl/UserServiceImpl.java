@@ -1,14 +1,19 @@
 package com.bookmall.Service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bookmall.Constant.ExceptionMsg;
 import com.bookmall.Constant.RedisConstant;
 import com.bookmall.Constant.WeChatConstant;
 import com.bookmall.Controller.ControllerPojo.AddressDTO;
 import com.bookmall.Controller.ControllerPojo.WeChatDTO;
 import com.bookmall.Controller.UserInfoThread;
+import com.bookmall.Controller.WebSocketContrller;
 import com.bookmall.CusException.IndentifiedException;
+import com.bookmall.CusException.OrderNotFoundException;
+import com.bookmall.Dao.Mapper.OrderMapper;
 import com.bookmall.Dao.Mapper.UserMapper;
 import com.bookmall.Dao.Pojo.Address;
+import com.bookmall.Dao.Pojo.Order;
 import com.bookmall.Dao.Pojo.User;
 import com.bookmall.Service.UserService;
 import com.bookmall.Utils.HTTPUtils;
@@ -19,10 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -35,6 +37,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     WeChatConstant weChatConstant;
+
+    @Autowired
+    OrderMapper orderMapper;
+
+    @Autowired
+    WebSocketContrller webSocketContrller;
     @Override
     public String checkUser(WeChatDTO weChatDTO) {
         // 验证验证码
@@ -144,4 +152,16 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAddress(uuid);
     }
 
+    @Override
+    public void remind(String orderid) throws OrderNotFoundException, IOException {
+        Order order = orderMapper.getOrder(orderid);
+        if (order == null){
+            throw new OrderNotFoundException(ExceptionMsg.ORDER_NOTFOUND);
+        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("type","2");
+        map.put("orderid",orderid);
+        map.put("text",orderid);
+        webSocketContrller.broadcast(JSONObject.toJSONString(map));
+    }
 }

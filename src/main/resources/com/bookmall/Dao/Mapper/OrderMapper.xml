@@ -31,4 +31,34 @@
         select * from shoporder where id = #{id}
     </select>
 
+    <update id="cancelOrder">
+        update shoporder set status = #{status},cancel_reason = #{cancel_reason},cancel_time = #{cancel_time}
+        where pay_status = 0 and #{datetime} > order_time and status != 6
+    </update>
+
+    <update id="adminCancelOrder">
+        update shoporder set status = 6 ,cancel_reason = #{cancel_reason},cancel_time = #{cancel_time}
+        where id = #{id}
+    </update>
+
+    <resultMap id="adminOrder" type="com.bookmall.Controller.ControllerPojo.AdminOrderVO">
+        <id property="id" column="id"/>
+        <result property="order_time" column="order_time"/>
+        <result property="amount" column="amount"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="consignee" column="consignee"/>
+        <collection property="books" ofType="com.bookmall.Controller.ControllerPojo.BookVO">
+            <result property="title" column="title"/>
+            <result property="author" column="author"/>
+            <result property="cnt" column="cnt"/>
+        </collection>
+
+    </resultMap>
+    <select id="getPendingConfirmOrders" resultMap="adminOrder">
+        SELECT s.id,s.order_time,s.amount,s.phone,s.address,s.consignee,o.cnt,b.title,b.author
+        FROM (shoporder as s JOIN order_detail as o on s.id = o.orderid)
+        JOIN book as b ON o.bookid = b.uuid
+        WHERE s.`status` = 2
+    </select>
 </mapper>

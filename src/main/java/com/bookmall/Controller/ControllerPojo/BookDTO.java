@@ -86,4 +86,18 @@ public class BookDTO {
         this.detail = detail;
         this.cnt = cnt;
     }
+
+    @Override
+    public String toString() {
+        return "BookDTO{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", time='" + time + '\'' +
+                ", press='" + press + '\'' +
+                ", price=" + price +
+                ", detail='" + detail + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", cnt=" + cnt +
+                '}';
+    }
 }

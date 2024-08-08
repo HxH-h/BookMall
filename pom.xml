@@ -40,7 +40,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
+<!--开启websocket-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
 <!--        操作数据库-->
         <dependency>
             <groupId>com.mysql</groupId>
@@ -115,7 +119,12 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
         </dependency>
-
+<!-- 操作cloudflare R2 对象存储-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.336</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

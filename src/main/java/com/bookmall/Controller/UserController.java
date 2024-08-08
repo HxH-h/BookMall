@@ -7,6 +7,7 @@ import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
 import com.bookmall.Controller.Response.Result;
 import com.bookmall.CusException.IndentifiedException;
+import com.bookmall.CusException.OrderNotFoundException;
 import com.bookmall.Dao.Pojo.Address;
 import com.bookmall.Service.Impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -81,6 +82,13 @@ public class UserController {
     public Result<List> getAddress(){
         List<Address> addresses = userServiceImpl.showAddress();
         return new Result<List>(Code.SEARCH_ADDRESS_SUCCESS,Message.SEARCH_ADDRESS_SUCCESS,addresses);
+    }
+
+    @Operation(summary = "用户催单")
+    @GetMapping("/reminder/{orderid}")
+    public Result reminder(@PathVariable String orderid) throws OrderNotFoundException, IOException {
+        userServiceImpl.remind(orderid);
+        return new Result(Code.REMINDER_SUCCESS,Message.REMINDER_SUCCESS);
     }
 
 

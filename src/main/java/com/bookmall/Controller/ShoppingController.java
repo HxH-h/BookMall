@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -60,7 +61,7 @@ public class ShoppingController {
 
     @Operation(summary = "用户支付")
     @PostMapping("/pay")
-    public Result pay(@RequestBody PayDTO payDTO) throws OrderNotFoundException {
+    public Result pay(@RequestBody PayDTO payDTO) throws OrderNotFoundException, IOException {
         shopServiceImpl.pay(payDTO);
         return new Result(Code.PAY_SUCCESS,Message.PAY_SUCCESS);
     }

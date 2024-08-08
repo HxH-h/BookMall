@@ -1,7 +1,5 @@
 package com.bookmall.Controller.Response;
 
-import io.swagger.v3.oas.models.security.SecurityScheme;
-
 //前表示响应类型  后表示功能类型
 public class Code {
     public static final Integer GET_SUCCESS = 1101;
@@ -26,6 +24,7 @@ public class Code {
 
     public static final Integer SEARCH_BOOK_SUCCESS = 1044;
     public static final Integer SEARCH_BOOK_EXCEPTION = 2044;
+    public static final Integer GETSUM_SUCCESS = 1054;
 
     public static final Integer UPDATE_TIME_EXCEPTION = 2005;
 
@@ -44,6 +43,12 @@ public class Code {
     public static final Integer GETINFO_SHOPCART_SUCCESS = 1027;
     public static final Integer ORDER_SUCCESS = 1037;
     public static final Integer PAY_SUCCESS = 1047;
+    public static final Integer REMINDER_SUCCESS = 1057;
+    public static final Integer GET_ORDER_SUCCESS = 1067;
+    public static final Integer CONFIRM_ORDER_SUCCESS = 1077;
+    public static final Integer CANCEL_ORDER_SUCCESS = 1087;
+    public static final Integer UPDATE_ORDERSTATUS_SUCCESS = 1097;
+
 
     public static final Integer BOOK_NOTFOUND_EXCEPTION = 2007;
     public static final Integer COUNT_NOT_ENOUGH = 2017;
@@ -52,5 +57,8 @@ public class Code {
     public static final Integer BOOK_SHORTAGE = 2047;
     public static final Integer NUMBER_ILLEGAL = 2057;
     public static final Integer ORDER_NOTFOUND = 2067;
+
+
+
 
 }

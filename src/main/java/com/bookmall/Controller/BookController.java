@@ -1,5 +1,6 @@
 package com.bookmall.Controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bookmall.Controller.ControllerPojo.BookDTO;
 import com.bookmall.Controller.Response.Code;
 import com.bookmall.Controller.Response.Message;
@@ -11,24 +12,28 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 @Tag(name = "后台管理图书")
 @RequestMapping("/admin/book")
+@CrossOrigin
 public class BookController {
     @Autowired
     BookServiceImpl bookServiceImpl;
 
-    //TODO 完善添加图书的功能，接收上传的图书图片并保存在阿里云中，返回访问链接
+
     @PostMapping("/add")
     @Operation(summary = "添加图书信息")
-    public Result addBook(@RequestBody BookDTO bookDTO){
-        bookServiceImpl.addBook(bookDTO);
+    public Result addBook(@RequestParam("book") String book,@RequestParam("file") MultipartFile file){
+        BookDTO bookDTO = JSONObject.parseObject(book, BookDTO.class);
 
+        bookServiceImpl.addBook(bookDTO,file);
         return new Result(Code.ADD_BOOK_SUCCESS, Message.ADD_BOOK_SUCCESS);
     }
+
 
     @PostMapping("/update")
     @Operation(summary = "更新图书信息")
@@ -38,7 +43,7 @@ public class BookController {
         return new Result(Code.UPDATE_BOOK_SUCCESS,Message.UPDATE_BOOK_SUCCESS);
     }
 
-    //TODO 同时删除阿里云中的图片
+
     @DeleteMapping("/{uuid}")
     @Operation(summary = "删除图书信息")
     public Result deleteBook(@PathVariable String uuid){
@@ -60,5 +65,12 @@ public class BookController {
 
         List<Book> books = bookServiceImpl.searchBookBypage(start, page);
         return new Result<List>(Code.SEARCH_BOOK_SUCCESS,Message.SEARCH_BOOK_SUCCESS,books);
+    }
+
+    @GetMapping("/sum")
+    @Operation(summary = "获取总数")
+    public Result getSum(){
+        int cnt = bookServiceImpl.getSum();
+        return new Result(Code.GETSUM_SUCCESS,Message.GETSUM_SUCCESS,cnt);
     }
 }

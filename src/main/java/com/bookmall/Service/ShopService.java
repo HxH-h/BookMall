@@ -7,6 +7,7 @@ import com.bookmall.Controller.ControllerPojo.PayDTO;
 import com.bookmall.CusException.*;
 import com.bookmall.Dao.Pojo.Book;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ShopService {
@@ -15,5 +16,6 @@ public interface ShopService {
      List<Book> showCart();
 
      OrderVO order(OrderDTO orderDTO) throws ShopCartEmptyException, AddressNotFoundException, BookShortageException;
-     void pay(PayDTO payDTO) throws OrderNotFoundException;
+     void pay(PayDTO payDTO) throws OrderNotFoundException, IOException;
+
 }

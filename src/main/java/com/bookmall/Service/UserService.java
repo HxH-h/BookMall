@@ -3,6 +3,7 @@ package com.bookmall.Service;
 import com.bookmall.Controller.ControllerPojo.AddressDTO;
 import com.bookmall.Controller.ControllerPojo.WeChatDTO;
 import com.bookmall.CusException.IndentifiedException;
+import com.bookmall.CusException.OrderNotFoundException;
 import com.bookmall.Dao.Pojo.Address;
 
 import java.io.IOException;
@@ -19,5 +20,6 @@ public interface UserService {
     void updateDefault(int id);
     void delAddress(int id);
     List<Address> showAddress();
+    void remind(String orderid) throws OrderNotFoundException, IOException;
 
 }

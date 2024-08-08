@@ -18,5 +18,7 @@ public class OrderConstant {
     public static final Integer UNSEND = 0;
     public static final Integer SEND = 1;
 
+    public static final Integer ORDER_TIMEOUT = 60*1000;
+
 
 }
