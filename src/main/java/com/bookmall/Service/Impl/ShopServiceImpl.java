@@ -179,7 +179,7 @@ public class ShopServiceImpl implements ShopService {
             orderDetail.setCnt(book.getCnt());
             orderDetail.setOrderid(id);
             orderDetails.add(orderDetail);
-            amount += book.getPrice();
+            amount += book.getPrice() * book.getCnt();
         }
         //获取系统时间
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -242,6 +242,7 @@ public class ShopServiceImpl implements ShopService {
         Date date = new Date(System.currentTimeMillis());
         String format = formatter.format(date);
         orderMapper.pay(payDTO.getOrderid(),OrderConstant.PENDING_CONFIREM,format, payDTO.getPay_method(), OrderConstant.PAID);
+
         HashMap<String, String> map = new HashMap<>();
         map.put("type","1");
         map.put("orderid",order.getId());

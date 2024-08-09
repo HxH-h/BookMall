@@ -51,4 +51,6 @@ public class Message {
     public static final String CANCEL_ORDER_SUCCESS = "取消订单成功";
     public static final String UPDATE_ORDERSTATUS_SUCCESS = "更改订单状态成功";
 
+    public static final String GET_STAT_SUCCESS = "获取统计信息成功";
+
 }

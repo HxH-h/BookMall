@@ -19,9 +19,6 @@ public class AWSConfig {
     @Value("${amazons.accessKeySecret}")
     public String accessKeySecret;
 
-    @Value("${amazons.token}")
-    public String token;
-
     @Value("${amazons.endpoint}")
     public String endpoint;
 

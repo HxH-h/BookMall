@@ -58,6 +58,8 @@ public class Code {
     public static final Integer NUMBER_ILLEGAL = 2057;
     public static final Integer ORDER_NOTFOUND = 2067;
 
+    public static final Integer GET_STAT_SUCCESS = 1008;
+
 
 
 

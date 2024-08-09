@@ -39,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
             orderMapper.updateOrderStatus(OrderConstant.DELIVERYING,id);
         } else if (status == 2) {
             orderMapper.updateOrderStatus(OrderConstant.COMPLETED,id);
+        } else if (status == 3) {
+            orderMapper.updateOrderStatus(OrderConstant.CONFIRMED,id);
         }
 
     }

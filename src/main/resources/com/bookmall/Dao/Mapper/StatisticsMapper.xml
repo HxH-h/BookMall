@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmall.Dao.Mapper.StatisticsMapper">
+    <select id="getTurnOverStat" resultType="com.bookmall.Dao.Pojo.TurnOverStat">
+        WITH RECURSIVE dates AS (
+        SELECT #{begin} AS timedate
+        UNION ALL
+        SELECT DATE_ADD(timedate, INTERVAL 1 DAY)
+        FROM dates
+        WHERE timedate &lt; #{end}
+        )
+
+        SELECT ROUND(SUM(amount),2) as sum,dates.timedate
+        from shoporder RIGHT JOIN dates
+        ON DATE_FORMAT(order_time,'%Y-%m-%d') = dates.timedate AND status = #{status}
+        GROUP BY dates.timedate
+
+    </select>
+
+    <select id="getOrderStat" resultType="int">
+        WITH RECURSIVE dates AS (
+        SELECT #{begin} AS timedate
+        UNION ALL
+        SELECT DATE_ADD(timedate, INTERVAL 1 DAY)
+        FROM dates
+        WHERE timedate &lt; #{end}
+        )
+
+        SELECT count(id)
+        FROM shoporder RIGHT JOIN dates
+        ON DATE_FORMAT(order_time,'%Y-%m-%d') = dates.timedate
+        <if test="status == 1">
+            AND status = 5
+        </if>
+        <if test="status == 2">
+            AND status !=5
+        </if>
+        GROUP BY dates.timedate
+    </select>
+
+    <select id="getBookRank" resultType="com.bookmall.Dao.Pojo.BookRank">
+        SELECT b.title AS name,od.cnt AS value
+        FROM order_detail AS od JOIN
+        (
+        SELECT uuid , title FROM book
+        ) AS b ON od.bookid = b.uuid
+
+        WHERE od.orderid IN (
+        SELECT id FROM shoporder
+        WHERE `status` = #{status} AND order_time > #{begin} and order_time &lt; #{end}
+        )
+        ORDER BY od.cnt DESC
+        LIMIT #{rank}
+    </select>
+
+</mapper>
